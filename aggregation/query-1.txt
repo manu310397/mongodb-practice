@@ -1,0 +1,17 @@
+In db sample_mflix, collection movies, find the unique countries.
+
+[
+  {
+    $unwind: {
+      path: "$countries",
+    },
+  },
+  {
+    $group: {
+      _id: null,
+      uniqueCountries: {
+        $addToSet: "$countries",
+      },
+    },
+  },
+]
