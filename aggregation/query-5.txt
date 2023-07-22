@@ -1,0 +1,27 @@
+5. In db sample_mflix, collections movies and comments, find the name/title of the movie having the most comments...
+
+[
+  {
+    $lookup: {
+      from: "comments",
+      localField: "_id",
+      foreignField: "movie_id",
+      as: "movie_comments"
+    }
+  },
+  {
+    $sort: {
+      num_mflix_comments: -1
+    }
+  },
+  {
+    $limit: 1
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1,
+      num_mflix_comments: 1
+    }
+  }
+]
